@@ -1,12 +1,15 @@
-const fsPromises = require('fs').promises;
+//Working file in synchoronus way
 
+const fsPromises = require('fs').promises;
 
 const { log } = require('console');
 const path = require('path');
-const shortText = path.join(__dirname,'textFiles','shortText.text');
-const shortWriteText = path.join(__dirname,'textFiles','shortWriteText.text')
-const renameText = path.join(__dirname,'textFiles','renameText.text')
-// const renamEdText = path.join(__dirname,'textFiles','renamEdText.text')
+const textFiles =  'textFiles';
+const shortText = path.join(__dirname, textFiles, 'shortText.text');
+const shortWriteText = path.join(__dirname, textFiles, 'shortWriteText.text')
+const renameText = path.join(__dirname, textFiles, 'renameText.text')
+// const renamEdText = path.join(__dirname, textFiles,'renamEdText.text')
+const deleteText = path.join(__dirname, textFiles, 'deleteText.text');
 
 
 const fileOps = async () => {
@@ -15,6 +18,9 @@ const fileOps = async () => {
         const data = await fsPromises.readFile(shortText, 'ascii');
         console.log(data);
         console.log('ReadFile Succsess')
+
+        await fsPromises.unlink(deleteText);
+        console.log('DeleteFile Success');
 
         await fsPromises.writeFile(shortWriteText,['Hello',' Coder ','How are you ?']);
         console.log('WriteFile Succsess');
